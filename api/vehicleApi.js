@@ -5,23 +5,27 @@ module.exports = function(app) {
     let jsonParser = bodyParser.json();
 
     app.post('/vehicle', jsonParser, function (req, res) {
-        console.log(req);
+        let timestamp = new Date().getTime();
         let vehicle = Vehicle({
             make: req.body.make,
             type: req.body.type,
             distance: req.body.distance,
-            workHours: req.body.workHours
+            workHours: req.body.workHours,
+            savedAt: timestamp,
+            modifiedAt: timestamp
         });
-        console.log(vehicle);
 
         vehicle.save(function(err) {
             if (err) throw err;
-            console.log(' vehicle saved! ');
-            res.send('vehicle saved to database!!');
+            res.json(JSON.stringify(vehicle));
         });
     });
 
-    app.get('/vehicle', function(req, res) {
-        res.send(' get well! ');
+    app.get('/vehicle/:id', function(req, res) {
+        let id = req.params.id;
+        Vehicle.findById(id, function(err, vehicle) {
+            if (err) throw err;
+            res.json(JSON.stringify(vehicle));
+        });
     });
 }

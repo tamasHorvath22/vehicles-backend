@@ -21,9 +21,12 @@ module.exports = function(app) {
     app.post('/register', jsonParser, function (req, res) {
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
             if (err) throw err;
+            let timestamp = new Date().getTime();
             let user = User({
                 username: req.body.username,
-                password: hash
+                password: hash,
+                savedAt: timestamp,
+                modifiedAt: timestamp
             });
             user.save(function(err) {
                 if (err) throw err;
