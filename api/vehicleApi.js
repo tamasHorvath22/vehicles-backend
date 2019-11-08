@@ -2,6 +2,7 @@ module.exports = function(app) {
     
     let Vehicle = require('../models/vehicleModel');
     let bodyParser = require('body-parser');
+    let errorCodes = require('./common/constants/api-error-codes');
     let jsonParser = bodyParser.json();
 
     app.post('/vehicle', jsonParser, function (req, res) {
@@ -46,7 +47,7 @@ module.exports = function(app) {
         let id = req.params.id;
         Vehicle.findById(id, function(err, vehicle) {
             if (err) {
-                res.send('there were some error!');
+                res.send(errorCodes.NO_ITEM_FOUND);
                 throw err;
             }
             res.json(JSON.stringify(vehicle));
