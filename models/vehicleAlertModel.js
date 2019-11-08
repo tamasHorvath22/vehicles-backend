@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let vehicleAlerteSchema = new Schema({
-    action: { type : String },
+    action: { type : String, required: true },
     alertDistance: { type : Number },
     alertDate: { type : Number },
     alertWorkHours: { type : Number },

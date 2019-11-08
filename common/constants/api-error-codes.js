@@ -1,0 +1,4 @@
+module.exports = Object.freeze({
+    NO_VEHICLE_FOUND: 'NO_VEHICLE_FOUND',
+    COULD_NOT_SAVE_ELEMENT: 'COULD_NOT_SAVE_ELEMENT'
+});
