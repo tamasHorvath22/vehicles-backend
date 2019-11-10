@@ -13,7 +13,7 @@ module.exports = function(app) {
                 res.send(errorCodes.NO_VEHICLE_FOUND);
                 throw err;
             }
-            let vehicleAlert = VehicleAlert({
+            let vehicleAlert = VehicleAlert.model({
                 action: req.body.data.action,
                 alertDistance: req.body.data.alertDistance || null,
                 alertDate: req.body.data.alertDate || null,

@@ -13,4 +13,7 @@ let vehicleAlerteSchema = new Schema({
 
 let VehicleAlert = mongoose.model('VehicleAlert', vehicleAlerteSchema);
 
-module.exports = VehicleAlert;
+module.exports = {
+    model: VehicleAlert,
+    schema: vehicleAlerteSchema
+};

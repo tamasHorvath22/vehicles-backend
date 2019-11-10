@@ -10,7 +10,8 @@ module.exports = function(app) {
         let vehicle = Vehicle({
             make: req.body.make || null,
             type: req.body.type || null,
-            distance: req.body.distance || 0,
+            licence: req.body.licence || null,
+            drivenDistance: req.body.drivenDistance || 0,
             workHours: req.body.workHours || null,
             savedAt: timestamp,
             modifiedAt: 0

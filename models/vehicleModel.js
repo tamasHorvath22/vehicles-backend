@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let vehicleAlert = require('./vehicleAlertModel');
 let Schema = mongoose.Schema;
 
 let vehicleSchema = new Schema({
@@ -9,8 +10,7 @@ let vehicleSchema = new Schema({
     workHours: { type : Number },
     savedAt: { type : Number },
     modifiedAt: { type : Number },
-    updates: { type: Array },
-    alerts: { type: Array }
+    alerts: [ vehicleAlert.schema ]
 });
 
 let Vehicle = mongoose.model('Vehicle', vehicleSchema);
