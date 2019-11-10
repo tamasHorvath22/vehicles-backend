@@ -39,7 +39,7 @@ module.exports = function(app) {
                 doc.save();
                 res.json(JSON.stringify(doc));
             } else {
-                res.send('no changes!');
+                res.send(errorCodes.NO_CHANGES_MADE);
             }
           });
     });

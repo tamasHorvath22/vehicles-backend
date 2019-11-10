@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    
+
     let Vehicle = require('../models/vehicleModel');
     let VehicleAlert = require('../models/vehicleAlertModel');
     let bodyParser = require('body-parser');
@@ -23,10 +23,10 @@ module.exports = function(app) {
                 alertSent: false
             });
 
-            // vehicleAlert.save(function(err) {
-            //     if (err) throw err;
-            //     res.json(JSON.stringify(vehicleAlert));
-            // });
+            vehicleAlert.save(function(err) {
+                if (err) throw err;
+                res.json(JSON.stringify(vehicleAlert));
+            });
 
             vehicle.alerts.push(vehicleAlert);
             vehicle.save(function(err) {
@@ -39,35 +39,39 @@ module.exports = function(app) {
         });
     });
 
-    // app.put('/vehicle', jsonParser, function (req, res) {
-    //     let hasChanged = false;
-    //     Vehicle.findById(req.body.id, function (err, doc){
-    //         if (err) throw err;
-    //         Object.keys(req.body.data).forEach(key => {
-    //             if (doc[key]) {
-    //                 doc[key] = req.body.data[key];
-    //                 hasChanged = true;
-    //             }
-    //         })
-    //         if (hasChanged) {
-    //             doc.__v++;
-    //             doc.modifiedAt = new Date().getTime();
-    //             doc.save();
-    //             res.json(JSON.stringify(doc));
-    //         } else {
-    //             res.send('no changes!');
-    //         }
-    //       });
-    // });
+    app.put('/vehicle-alert', jsonParser, function (req, res) {
+        let hasChanged = false;
+        
+        VehicleAlert.model.findById(req.body.alertId, function (err, alert) {
+            if (err) {
+                res.send(errorCodes.NO_ALERT_FOUND);
+                throw err;
+            }
+            Object.keys(req.body.data).forEach(key => {
+                if (alert[key]) {
+                    alert[key] = req.body.data[key];
+                    hasChanged = true;
+                }
+            })
+            if (hasChanged) {
+                alert.__v++;
+                alert.modifiedAt = new Date().getTime();
+                alert.save();
+                res.json(JSON.stringify(alert));
+            } else {
+                res.send(errorCodes.NO_CHANGES_MADE);
+            }
+        });
+    });
 
-    // app.get('/vehicle/:id', function(req, res) {
-    //     let id = req.params.id;
-    //     Vehicle.findById(id, function(err, vehicle) {
-    //         if (err) {
-    //             res.send(errorCodes.NO_ITEM_FOUND);
-    //             throw err;
-    //         }
-    //         res.json(JSON.stringify(vehicle));
-    //     });
-    // });
+    app.get('/vehicle-alert/:id', function(req, res) {
+        let id = req.params.id;
+        VehicleAlert.model.findById(id, function(err, alert) {
+            if (err) {
+                res.send(errorCodes.NO_ALERT_FOUND);
+                throw err;
+            }
+            res.json(JSON.stringify(alert));
+        });
+    });
 }
