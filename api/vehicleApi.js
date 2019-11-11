@@ -46,12 +46,22 @@ module.exports = function(app) {
 
     app.get('/vehicle/:id', function(req, res) {
         let id = req.params.id;
-        Vehicle.findById(id, function(err, vehicle) {
-            if (err) {
-                res.send(errorCodes.NO_VEHICLE_FOUND);
-                throw err;
-            }
-            res.json(JSON.stringify(vehicle));
-        });
+        if (id !== 'all') {
+            Vehicle.findById(id, function(err, vehicle) {
+                if (err) {
+                    res.send(errorCodes.NO_VEHICLE_FOUND);
+                    throw err;
+                }
+                res.json(JSON.stringify(vehicle));
+            });
+        } else {
+            Vehicle.find(function(err, vehicles) {
+                if (err) {
+                    res.send(errorCodes.NO_VEHICLE_FOUND);
+                    throw err;
+                }
+                res.json(JSON.stringify(vehicles));
+            });
+        }
     });
 }
