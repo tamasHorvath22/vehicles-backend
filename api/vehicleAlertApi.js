@@ -69,4 +69,14 @@ module.exports = function(app) {
             res.json(JSON.stringify(alerts));
         });
     });
+
+    app.delete('/vehicle-alert', jsonParser, function(req, res) {
+        VehicleAlert.model.deleteOne(req.body, function(err) {
+            if (err) {
+                res.send(errorCodes.COULD_NOT_DELETE_VEHILE_ALERT);
+                throw err;
+            }
+            res.send(errorCodes.VEHICLE_ALERT_DELETED);
+        });
+    });
 }

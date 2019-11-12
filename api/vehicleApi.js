@@ -54,4 +54,14 @@ module.exports = function(app) {
             res.json(JSON.stringify(vehicles));
         });
     });
+
+    app.delete('/vehicles', jsonParser, function(req, res) {
+        Vehicle.deleteOne(req.body, function(err, vehicles) {
+            if (err) {
+                res.send(errorCodes.COULD_NOT_DELETE_VEHILE);
+                throw err;
+            }
+            res.send(errorCodes.VEHICLE_DELETED);
+        });
+    });
 }
