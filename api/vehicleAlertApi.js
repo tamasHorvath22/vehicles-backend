@@ -23,11 +23,6 @@ module.exports = function(app) {
                 alertSent: false
             });
 
-            vehicleAlert.save(function(err) {
-                if (err) throw err;
-                res.json(JSON.stringify(vehicleAlert));
-            });
-
             vehicle.alerts.push(vehicleAlert);
             vehicle.save(function(err) {
                 if (err) {

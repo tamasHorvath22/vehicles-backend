@@ -10,6 +10,7 @@ module.exports = function(app) {
         let vehicle = Vehicle({
             make: req.body.make || null,
             type: req.body.type || null,
+            vehicleType: req.body.vehicleType,
             licence: req.body.licence || null,
             drivenDistance: req.body.drivenDistance || 0,
             workHours: req.body.workHours || null,
@@ -44,24 +45,14 @@ module.exports = function(app) {
           });
     });
 
-    app.get('/vehicle/:id', function(req, res) {
-        let id = req.params.id;
-        if (id !== 'all') {
-            Vehicle.findById(id, function(err, vehicle) {
-                if (err) {
-                    res.send(errorCodes.NO_VEHICLE_FOUND);
-                    throw err;
-                }
-                res.json(JSON.stringify(vehicle));
-            });
-        } else {
-            Vehicle.find(function(err, vehicles) {
-                if (err) {
-                    res.send(errorCodes.NO_VEHICLE_FOUND);
-                    throw err;
-                }
-                res.json(JSON.stringify(vehicles));
-            });
-        }
+    app.get('/vehicles', jsonParser, function(req, res) {
+        Vehicle.find(req.body, function(err, vehicles) {
+            if (err) {
+                res.send(errorCodes.NO_VEHICLE_FOUND);
+                throw err;
+            }
+            console.log(vehicles);
+            res.json(JSON.stringify(vehicles));
+        });
     });
 }

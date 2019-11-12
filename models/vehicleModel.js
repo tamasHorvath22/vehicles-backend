@@ -5,6 +5,7 @@ let Schema = mongoose.Schema;
 let vehicleSchema = new Schema({
     make: { type : String },
     type: { type : String },
+    vehicleType: { type: String, required: true },
     licence: { type : String },
     drivenDistance: { type : Number },
     workHours: { type : Number },
