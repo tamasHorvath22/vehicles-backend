@@ -59,14 +59,14 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/vehicle-alert/:id', function(req, res) {
+    app.get('/vehicle-alert', jsonParser, function(req, res) {
         let id = req.params.id;
-        VehicleAlert.model.findById(id, function(err, alert) {
+        VehicleAlert.model.find(req.body, function(err, alerts) {
             if (err) {
                 res.send(errorCodes.NO_ALERT_FOUND);
                 throw err;
             }
-            res.json(JSON.stringify(alert));
+            res.json(JSON.stringify(alerts));
         });
     });
 }

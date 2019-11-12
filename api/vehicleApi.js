@@ -51,7 +51,6 @@ module.exports = function(app) {
                 res.send(errorCodes.NO_VEHICLE_FOUND);
                 throw err;
             }
-            console.log(vehicles);
             res.json(JSON.stringify(vehicles));
         });
     });
