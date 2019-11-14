@@ -1,10 +1,12 @@
+const jwt = require('jsonwebtoken');
+
 const userApi = require('./userApi');
 const vehicleApi = require('./vehicleApi');
 const vehicleAlertApi = require('./vehicleAlertApi');
 const alertSettingsApi = require('./alertSettingsApi');
 
+const errorCodes = require('../common/constants/api-error-codes');
 const config = require('../config');
-const jwt = require('jsonwebtoken');
 
 module.exports = function(app, ProtectedRoutes) {
     app.use('/api', ProtectedRoutes);
@@ -17,7 +19,7 @@ module.exports = function(app, ProtectedRoutes) {
             }
             jwt.verify(token, config.getJwtPrivateKey(), (err, decoded) => {
                 if (err) {
-                    res.send(errorCodes.TOKEN_ERROR);
+                    res.send(errorCodes.USER.TOKEN_ERROR);
                     throw err;
                 } else {
                     req.decoded = decoded;
@@ -25,7 +27,7 @@ module.exports = function(app, ProtectedRoutes) {
                 }
             });
         } else {
-        res.send(errorCodes.MISSING_TOKEN);
+        res.send(errorCodes.USER.MISSING_TOKEN);
         }
     });
 

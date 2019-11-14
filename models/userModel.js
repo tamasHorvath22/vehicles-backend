@@ -1,11 +1,12 @@
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 let Schema = mongoose.Schema;
 
 let userSchema = new Schema({
-    username: { type : String, unique : true, required : true, dropDups: true },
+    username: { type : String, unique: true, required: true, dropDups: true },
     password: { type : String },
+    email: { type : String, unique: true, required: true }
 }, { timestamps: true });
 
 userSchema.pre('save', function (next) {

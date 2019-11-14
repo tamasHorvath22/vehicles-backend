@@ -1,9 +1,9 @@
 module.exports = function(app) {
     
-    let Vehicle = require('../models/vehicleModel');
-    let bodyParser = require('body-parser');
-    let errorCodes = require('../common/constants/api-error-codes');
-    let jsonParser = bodyParser.json();
+    const Vehicle = require('../models/vehicleModel');
+    const bodyParser = require('body-parser');
+    const jsonParser = bodyParser.json();
+    const errorCodes = require('../common/constants/api-error-codes');
 
     app.post('/api/vehicle', jsonParser, function (req, res) {
         let timestamp = new Date().getTime();
@@ -39,7 +39,7 @@ module.exports = function(app) {
                 doc.save();
                 res.json(JSON.stringify(doc));
             } else {
-                res.send(errorCodes.NO_CHANGES_MADE);
+                res.send(errorCodes.COMMON.NO_CHANGES_MADE);
             }
           });
     });
@@ -47,7 +47,7 @@ module.exports = function(app) {
     app.get('/api/vehicle', jsonParser, function(req, res) {
         Vehicle.find(req.body, function(err, vehicles) {
             if (err) {
-                res.send(errorCodes.NO_VEHICLE_FOUND);
+                res.send(errorCodes.VEHICLE.NO_VEHICLE_FOUND);
                 throw err;
             }
             res.json(JSON.stringify(vehicles));
@@ -57,10 +57,10 @@ module.exports = function(app) {
     app.delete('/api/vehicle', jsonParser, function(req, res) {
         Vehicle.deleteOne(req.body, function(err, vehicles) {
             if (err) {
-                res.send(errorCodes.COULD_NOT_DELETE_VEHILE);
+                res.send(errorCodes.VEHICLE.COULD_NOT_DELETE_VEHILE);
                 throw err;
             }
-            res.send(errorCodes.VEHICLE_DELETED);
+            res.send(errorCodes.VEHICLE.VEHICLE_DELETED);
         });
     });
 }

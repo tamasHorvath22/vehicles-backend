@@ -3,14 +3,14 @@ module.exports = function(app) {
     let Vehicle = require('../models/vehicleModel');
     let VehicleAlert = require('../models/vehicleAlertModel');
     let bodyParser = require('body-parser');
-    let errorCodes = require('../common/constants/api-error-codes');
     let jsonParser = bodyParser.json();
+    const errorCodes = require('../common/constants/api-error-codes');
 
     app.post('/api/vehicle-alert', jsonParser, function (req, res) {
 
         Vehicle.findById(req.body.id, function(err, vehicle) {
             if (err) {
-                res.send(errorCodes.NO_VEHICLE_FOUND);
+                res.send(errorCodes.VEHICLE.NO_VEHICLE_FOUND);
                 throw err;
             }
             let vehicleAlert = VehicleAlert.model({
@@ -26,7 +26,7 @@ module.exports = function(app) {
             vehicle.alerts.push(vehicleAlert);
             vehicle.save(function(err) {
                 if (err) {
-                    res.send(errorCodes.COULD_NOT_SAVE_ELEMENT);
+                    res.send(errorCodes.VEHICLE.VEHICLE.COULD_NOT_SAVE_VEHICLE);
                     throw err;
                 }
                 res.json(JSON.stringify(vehicle));
@@ -39,7 +39,7 @@ module.exports = function(app) {
         
         VehicleAlert.model.findById(req.body.alertId, function (err, alert) {
             if (err) {
-                res.send(errorCodes.NO_ALERT_FOUND);
+                res.send(errorCodes.VEHICLE_ALERT.NO_ALERT_FOUND);
                 throw err;
             }
             Object.keys(req.body.data).forEach(key => {
@@ -53,7 +53,7 @@ module.exports = function(app) {
                 alert.save();
                 res.json(JSON.stringify(alert));
             } else {
-                res.send(errorCodes.NO_CHANGES_MADE);
+                res.send(errorCodes.COMMON.NO_CHANGES_MADE);
             }
         });
     });
@@ -62,7 +62,7 @@ module.exports = function(app) {
         let id = req.params.id;
         VehicleAlert.model.find(req.body, function(err, alerts) {
             if (err) {
-                res.send(errorCodes.NO_ALERT_FOUND);
+                res.send(errorCodes.VEHICLE_ALERT.NO_ALERT_FOUND);
                 throw err;
             }
             res.json(JSON.stringify(alerts));
@@ -72,10 +72,10 @@ module.exports = function(app) {
     app.delete('/api/vehicle-alert', jsonParser, function(req, res) {
         VehicleAlert.model.deleteOne(req.body, function(err) {
             if (err) {
-                res.send(errorCodes.COULD_NOT_DELETE_VEHILE_ALERT);
+                res.send(errorCodes.VEHICLE_ALERT.COULD_NOT_DELETE_VEHILE_ALERT);
                 throw err;
             }
-            res.send(errorCodes.VEHICLE_ALERT_DELETED);
+            res.send(errorCodes.VEHICLE_ALERT.VEHICLE_ALERT_DELETED);
         });
     });
 }

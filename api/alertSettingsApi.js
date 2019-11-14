@@ -1,5 +1,7 @@
 module.exports = function(app) {
 
+    const errorCodes = require('../common/constants/api-error-codes');
+
     // let bodyParser = require('body-parser');
     // let User = require('../models/userModel');
     // let jsonParser = bodyParser.json();
