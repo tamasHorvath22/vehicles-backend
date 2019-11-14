@@ -1,13 +1,13 @@
-let express = require('express');
-let app = express();
-let api = require('./api/api');
-let mongoose = require('mongoose');
-let config = require('./config');
+const express = require('express');
+const app = express();
+const api = require('./api/api');
+const mongoose = require('mongoose');
+const config = require('./config');
 
 mongoose.set('useCreateIndex', true);
 mongoose.connect(config.getDbConnectionString(), { useUnifiedTopology: true, useNewUrlParser: true });
 
 api(app);
 
-app.listen(config.getServerDetails().port || 3000);
+app.listen(config.getServerDetails().PORT || 3000);
 

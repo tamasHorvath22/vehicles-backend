@@ -1,11 +1,11 @@
-let configValues = require('./config');
+const dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = {
     getDbConnectionString: function() {
-        return 'mongodb+srv://' + configValues.database.username + ':' +
-        configValues.database.password + '@cluster0-m8z4s.mongodb.net/vehicles?retryWrites=true&w=majority'
+        return `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster0-m8z4s.mongodb.net/vehicles?retryWrites=true&w=majority`;
     },
     getServerDetails: function() {
-        return configValues.server;
+        return { BASE_URL: process.env.BASE_URL, PORT: process.env.PORT };
     }
 };

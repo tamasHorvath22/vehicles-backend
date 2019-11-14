@@ -50,7 +50,6 @@ module.exports = function(app) {
             })
             if (hasChanged) {
                 alert.__v++;
-                alert.modifiedAt = new Date().getTime();
                 alert.save();
                 res.json(JSON.stringify(alert));
             } else {

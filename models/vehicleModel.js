@@ -9,10 +9,8 @@ let vehicleSchema = new Schema({
     licence: { type : String },
     drivenDistance: { type : Number },
     workHours: { type : Number },
-    savedAt: { type : Number },
-    modifiedAt: { type : Number },
     alerts: [ vehicleAlert.schema ]
-});
+}, { timestamps: true });
 
 let Vehicle = mongoose.model('Vehicle', vehicleSchema);
 

@@ -36,7 +36,6 @@ module.exports = function(app) {
             })
             if (hasChanged) {
                 doc.__v++;
-                doc.modifiedAt = new Date().getTime();
                 doc.save();
                 res.json(JSON.stringify(doc));
             } else {
@@ -45,7 +44,7 @@ module.exports = function(app) {
           });
     });
 
-    app.get('/vehicles', jsonParser, function(req, res) {
+    app.get('/vehicle', jsonParser, function(req, res) {
         Vehicle.find(req.body, function(err, vehicles) {
             if (err) {
                 res.send(errorCodes.NO_VEHICLE_FOUND);
@@ -55,7 +54,7 @@ module.exports = function(app) {
         });
     });
 
-    app.delete('/vehicles', jsonParser, function(req, res) {
+    app.delete('/vehicle', jsonParser, function(req, res) {
         Vehicle.deleteOne(req.body, function(err, vehicles) {
             if (err) {
                 res.send(errorCodes.COULD_NOT_DELETE_VEHILE);

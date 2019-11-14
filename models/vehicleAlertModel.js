@@ -6,10 +6,8 @@ let vehicleAlerteSchema = new Schema({
     alertDistance: { type : Number },
     alertDate: { type : Number },
     alertWorkHours: { type : Number },
-    savedAt: { type : Number },
-    modifiedAt: { type : Number },
     alertSent: { type: Boolean, default: false }
-});
+}, { timestamps: true });
 
 let VehicleAlert = mongoose.model('VehicleAlert', vehicleAlerteSchema);
 
