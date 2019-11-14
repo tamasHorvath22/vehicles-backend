@@ -5,7 +5,7 @@ module.exports = function(app) {
     let errorCodes = require('../common/constants/api-error-codes');
     let jsonParser = bodyParser.json();
 
-    app.post('/vehicle', jsonParser, function (req, res) {
+    app.post('/api/vehicle', jsonParser, function (req, res) {
         let timestamp = new Date().getTime();
         let vehicle = Vehicle({
             make: req.body.make || null,
@@ -24,7 +24,7 @@ module.exports = function(app) {
         });
     });
 
-    app.put('/vehicle', jsonParser, function (req, res) {
+    app.put('/api/vehicle', jsonParser, function (req, res) {
         let hasChanged = false;
         Vehicle.findById(req.body.id, function (err, doc){
             if (err) throw err;
@@ -44,7 +44,7 @@ module.exports = function(app) {
           });
     });
 
-    app.get('/vehicle', jsonParser, function(req, res) {
+    app.get('/api/vehicle', jsonParser, function(req, res) {
         Vehicle.find(req.body, function(err, vehicles) {
             if (err) {
                 res.send(errorCodes.NO_VEHICLE_FOUND);
@@ -54,7 +54,7 @@ module.exports = function(app) {
         });
     });
 
-    app.delete('/vehicle', jsonParser, function(req, res) {
+    app.delete('/api/vehicle', jsonParser, function(req, res) {
         Vehicle.deleteOne(req.body, function(err, vehicles) {
             if (err) {
                 res.send(errorCodes.COULD_NOT_DELETE_VEHILE);

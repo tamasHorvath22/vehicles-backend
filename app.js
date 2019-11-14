@@ -7,7 +7,6 @@ const config = require('./config');
 mongoose.set('useCreateIndex', true);
 mongoose.connect(config.getDbConnectionString(), { useUnifiedTopology: true, useNewUrlParser: true });
 
-api(app);
+api(app, express.Router());
 
 app.listen(config.getServerDetails().PORT || 3000);
-
