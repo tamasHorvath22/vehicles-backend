@@ -7,6 +7,4 @@ let alertSettingsSchema = new Schema({
     period: { type : String, required : true }
 });
 
-let AlertSettings = mongoose.model('AlertSettings', alertSettingsSchema);
-
-module.exports = AlertSettings;
+module.exports = mongoose.model('AlertSettings', alertSettingsSchema);;
