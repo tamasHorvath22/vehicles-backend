@@ -2,9 +2,9 @@ const AlertSettings = require('../models/alertSettingsModel');
 const alertPeriods = require('../common/constants/check-alert-periods');
 
 module.exports = function () {
-    AlertSettings.find(function(err, vehicles) {
+    AlertSettings.find(function(err, oldSettings) {
         if (err) throw err;
-        if (vehicles.length) return;
+        if (oldSettings.length) return;
 
         let settings = AlertSettings({
             runAt: 8,
