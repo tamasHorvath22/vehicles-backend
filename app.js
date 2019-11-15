@@ -11,5 +11,4 @@ mongoose.connect(config.getDbConnectionString(), { useUnifiedTopology: true, use
 api(app, express.Router());
 initModule();
 
-
 app.listen(config.getServerDetails().PORT || 3000);

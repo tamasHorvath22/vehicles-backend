@@ -23,5 +23,8 @@ module.exports = Object.freeze({
     },
     COMMON: {
         NO_CHANGES_MADE: 'NO_CHANGES_MADE',
+    },
+    ALERT_SETTINGS: {
+        SUCCESSFUL_MODIFICATION: 'SUCCESSFUL_MODIFICATION'
     }
 });
