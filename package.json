@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/tamasHorvath22/vehicles-backend#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cron": "^1.7.2",
     "dotenv": "^8.2.0",
